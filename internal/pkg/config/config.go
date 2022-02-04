@@ -68,7 +68,8 @@ func getConfigDir() string {
 	nowConfigDir := ""
 	sysType := runtime.GOOS
 	if sysType == "linux" {
-		nowConfigDir = configDirLinux
+		home, _ := os.UserHomeDir()
+		nowConfigDir = home + configDirLinux
 	}
 	if sysType == "windows" {
 		nowConfigDir = configDirWindows

@@ -32,7 +32,8 @@ func getSpeFileName() string {
 	nowSpeFileName := ""
 	sysType := runtime.GOOS
 	if sysType == "linux" {
-		nowSpeFileName = specialFileNameLinux
+		home, _ := os.UserHomeDir()
+		nowSpeFileName = home + specialFileNameLinux
 	}
 	if sysType == "windows" {
 		nowSpeFileName = specialFileNameWindows

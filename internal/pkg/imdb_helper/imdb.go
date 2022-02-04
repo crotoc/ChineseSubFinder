@@ -8,6 +8,7 @@ import (
 	"strings"
 )
 
+
 // GetVideoInfoFromIMDB 从 IMDB ID 查询影片的信息
 func GetVideoInfoFromIMDB(imdbID string, _reqParam ...types.ReqParam) (*imdb.Title, error) {
 	var reqParam types.ReqParam
@@ -23,6 +24,7 @@ func GetVideoInfoFromIMDB(imdbID string, _reqParam ...types.ReqParam) (*imdb.Tit
 	return t, nil
 }
 
+
 // IsChineseVideo 从 imdbID 去查询判断是否是中文视频
 func IsChineseVideo(imdbID string, _reqParam ...types.ReqParam) (bool, *imdb.Title, error) {
 
@@ -34,6 +36,10 @@ func IsChineseVideo(imdbID string, _reqParam ...types.ReqParam) (bool, *imdb.Tit
 		reqParam = _reqParam[0]
 	}
 
+	if len(imdbID) <= 0 {
+		return false, nil, nil
+	}
+	
 	t, err := GetVideoInfoFromIMDB(imdbID, reqParam)
 	if err != nil {
 		return false, nil, err
@@ -42,6 +48,8 @@ func IsChineseVideo(imdbID string, _reqParam ...types.ReqParam) (bool, *imdb.Tit
 	if len(t.Languages) <= 0 {
 		return false, nil, nil
 	}
+
+	
 	firstLangLowCase := strings.ToLower(t.Languages[0])
 	// 判断第一语言是否是中文
 	switch firstLangLowCase {

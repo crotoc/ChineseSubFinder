@@ -83,7 +83,8 @@ func getDbName() string {
 	nowDbFileName := ""
 	sysType := runtime.GOOS
 	if sysType == "linux" {
-		nowDbFileName = dbFileNameLinux
+		home, _ := os.UserHomeDir()
+		nowDbFileName = home + dbFileNameLinux
 	}
 	if sysType == "windows" {
 		nowDbFileName = dbFileNameWindows
